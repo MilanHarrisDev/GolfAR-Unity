@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -9,7 +10,8 @@ public class GameManager : MonoBehaviour {
 
         MENU,
         GAME_SINGLE,
-        GAME_MULTI
+        GAME_MULTI,
+        WIN
     }
 
     public GameState state = GameState.MENU;
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour {
 
     public List<GameObject> menuObjects;
     public List<GameObject> gameObjects;
+    public GameObject winObject;
 
     [SerializeField]
     private Transform course;
@@ -48,6 +51,10 @@ public class GameManager : MonoBehaviour {
         ChangeState(GameState.GAME_SINGLE);
     }
 
+    public void Win(){
+        ChangeState(GameState.WIN);
+    }
+
     private void ChangeState(GameState newState)
     {
         switch(newState)
@@ -57,6 +64,8 @@ public class GameManager : MonoBehaviour {
                     go.SetActive(true);
                 foreach (GameObject go in gameObjects)
                     go.SetActive(false);
+
+                winObject.SetActive(false);
                 break;
             case GameState.GAME_SINGLE:
                 foreach (GameObject go in menuObjects)
@@ -64,8 +73,18 @@ public class GameManager : MonoBehaviour {
                 foreach (GameObject go in gameObjects)
                     go.SetActive(true);
 
+                winObject.SetActive(false);
+
                 EndTurn();
                 shootControl.ResetShoot();
+                break;
+            case GameState.WIN:
+                foreach (GameObject go in menuObjects)
+                    go.SetActive(false);
+                foreach (GameObject go in gameObjects)
+                    go.SetActive(false);
+
+                winObject.SetActive(true);
                 break;
         }
     }
@@ -97,5 +116,10 @@ public class GameManager : MonoBehaviour {
         lastPlayerPos = player.transform.position;
         Debug.Log("Turn Ended. Current Turn: " + turn);
         turnCounter.text = "turn: " + Turn;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 }

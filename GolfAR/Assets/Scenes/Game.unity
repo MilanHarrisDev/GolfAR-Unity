@@ -255,6 +255,7 @@ MonoBehaviour:
   - {fileID: 1393030450}
   gameObjects:
   - {fileID: 145193961}
+  winObject: {fileID: 456558142}
   course: {fileID: 275876860}
   imageMarker: {fileID: 974582366}
   turnCounter: {fileID: 20829726}
@@ -485,6 +486,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114317818751181632, guid: c56f1de895ef24a9c879d9a6977bb8e8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 30778058}
     - target: {fileID: 114241905374846902, guid: c56f1de895ef24a9c879d9a6977bb8e8,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -495,7 +501,7 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 30778059}
-    - target: {fileID: 114317818751181632, guid: c56f1de895ef24a9c879d9a6977bb8e8,
+    - target: {fileID: 114438708868723934, guid: c56f1de895ef24a9c879d9a6977bb8e8,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -515,6 +521,10 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2053141963}
+    - target: {fileID: 1265197460215808, guid: c56f1de895ef24a9c879d9a6977bb8e8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c56f1de895ef24a9c879d9a6977bb8e8, type: 2}
   m_IsPrefabParent: 0
@@ -523,6 +533,59 @@ Transform:
   m_PrefabParentObject: {fileID: 4622429840313546, guid: c56f1de895ef24a9c879d9a6977bb8e8,
     type: 2}
   m_PrefabInternal: {fileID: 273689359}
+--- !u!1 &334256226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 334256228}
+  - component: {fileID: 334256227}
+  - component: {fileID: 334256229}
+  m_Layer: 0
+  m_Name: WinTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &334256227
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 334256226}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &334256228
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 334256226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.62, y: -1.001, z: -8.68}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &334256229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 334256226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f139dee46334d99bc48bbb4afec915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &398300610
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +654,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 398300610}
+--- !u!1 &456558142 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1265197460215808, guid: c56f1de895ef24a9c879d9a6977bb8e8,
+    type: 2}
+  m_PrefabInternal: {fileID: 273689359}
 --- !u!21 &532841796
 Material:
   serializedVersion: 6
@@ -755,12 +823,12 @@ Transform:
   m_PrefabInternal: {fileID: 273689359}
 --- !u!1 &977809483 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1792379990988044, guid: c56f1de895ef24a9c879d9a6977bb8e8,
+  m_PrefabParentObject: {fileID: 1010389104915144, guid: c56f1de895ef24a9c879d9a6977bb8e8,
     type: 2}
   m_PrefabInternal: {fileID: 273689359}
 --- !u!1 &1393030450 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1265197460215808, guid: c56f1de895ef24a9c879d9a6977bb8e8,
+  m_PrefabParentObject: {fileID: 1636183045314018, guid: c56f1de895ef24a9c879d9a6977bb8e8,
     type: 2}
   m_PrefabInternal: {fileID: 273689359}
 --- !u!1 &1582913420
