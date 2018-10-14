@@ -100,7 +100,7 @@ public class ShootController : MonoBehaviour
                 arrow.fillAmount = fill;
 
                 shootVector = (GetXZVector(ball.position) - GetXZVector(hit.point)).normalized;
-                shootSpeed = fill * 20f;
+                shootSpeed = fill * 50f;
             }
         }
 

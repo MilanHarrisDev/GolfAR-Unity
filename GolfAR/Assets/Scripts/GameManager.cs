@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour {
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.transform.position = lastPlayerPos;
         Debug.Log("Player died");
-        EndTurn();
     }
 
     public void EndTurn()
