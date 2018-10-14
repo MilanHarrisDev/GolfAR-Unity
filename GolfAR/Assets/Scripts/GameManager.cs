@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour {
     public GameObject winObject;
 
     [SerializeField]
+    private List<GameObject> obstacles;
+    private Transform[] obstacleSpawns;
+
+    [SerializeField]
     private Transform course;
     [SerializeField]
     private Transform imageMarker;
@@ -92,6 +96,7 @@ public class GameManager : MonoBehaviour {
     private void Start()
     {
         ChangeState(GameState.MENU);
+        obstacleSpawns = GameObject.Find("ObstacleSpawns").transform.GetComponentsInChildren<Transform>();
     }
 
     public void PlayerDeath()
@@ -103,6 +108,8 @@ public class GameManager : MonoBehaviour {
 
     public void EndTurn()
     {
+        Instantiate(obstacles[Random.Range(0,3)], obstacleSpawns[Random.Range(0, obstacleSpawns.Length)].position, Quaternion.identity);
+
         playerPosDifference = player.transform.position - imageMarker.transform.position;
         player.transform.parent = null;
         course.parent = null;
@@ -120,6 +127,6 @@ public class GameManager : MonoBehaviour {
 
     public void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

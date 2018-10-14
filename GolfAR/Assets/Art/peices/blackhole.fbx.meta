@@ -1,48 +1,24 @@
 fileFormatVersion: 2
-guid: 298788b615477433a93c4b3dc5be4905
+guid: b350cf1f1fd7f4992a431df901bf4823
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Cube_000
-    100004: Cube_001
-    100006: Cylinder
-    100008: Cube
-    100010: Cylinder_001
     400000: //RootNode
-    400002: Cube_000
-    400004: Cube_001
-    400006: Cylinder
-    400008: Cube
-    400010: Cylinder_001
-    2100000: Material
-    2100002: Grass
-    2100004: brick
-    2100006: unnamed
-    2100008: hole
-    2300000: Cube_000
-    2300002: Cube_001
-    2300004: Cylinder
-    2300006: Cube
-    2300008: Cylinder_001
-    3300000: Cube_000
-    3300002: Cube_001
-    3300004: Cylinder
-    3300006: Cube
-    3300008: Cylinder_001
-    4300000: Cube_000
-    4300002: Cube_001
-    4300004: Cylinder
-    4300006: Cube
-    4300008: Cylinder_001
-    7400000: Default Take
-    9500000: //RootNode
-  externalObjects: {}
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cylinder.001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: c1b1b5890652a4a12b6bc1794f89157d, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -109,7 +85,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
