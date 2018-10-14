@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShootController : MonoBehaviour {
+public class ShootController : MonoBehaviour
+{
 
     [SerializeField]
     private LayerMask shootMask;
@@ -14,7 +15,7 @@ public class ShootController : MonoBehaviour {
     [SerializeField]
     private Image arrow;
 
-    public bool canShoot = true;
+    public bool canShoot = false;
 
     [SerializeField]
     private GameObject pullbackInterface;
@@ -29,7 +30,7 @@ public class ShootController : MonoBehaviour {
 
     private Vector3 lastVelocity = Vector3.zero;
 
-    public bool Moving { get { return moving; }}
+    public bool Moving { get { return moving; } }
     private bool moving = false;
 
     private void Start()
@@ -41,12 +42,13 @@ public class ShootController : MonoBehaviour {
     {
         //Debug.Log("velocity: " + rb.velocity + ", magnitude: " + rb.velocity.magnitude);
 
-        Physics.gravity = -imageTarget.up;
+        Physics.gravity = -imageTarget.up * 9.8f;
 
         if (Input.GetMouseButton(0))
             RotateArrowPivot(Input.mousePosition);
         else if (Input.touchCount > 0)
             RotateArrowPivot(Input.GetTouch(0).position);
+
 
         if (rb.velocity != lastVelocity)//change in velocity
         {
@@ -58,26 +60,33 @@ public class ShootController : MonoBehaviour {
                 Debug.Log("Ball started moving");
             }
 
-            if (rb.velocity == Vector3.zero)
+            if (rb.velocity.magnitude < 0.05f)
             {
                 moving = false;
                 GameManager.Instance.EndTurn();
+                rb.useGravity = false;
+                rb.isKinematic = true;
+                rb.velocity = Vector3.zero;
+
+                Debug.Log("ball stopped");
             }
-
-
         }
-
 
         lastVelocity = rb.velocity;
     }
 
     public void Shoot()
     {
-        if(canShoot)
+        if (canShoot)
+        {
+            rb.useGravity = true;
+            rb.isKinematic = false;
             rb.velocity = shootVector * shootSpeed;
+        }
     }
 
-    void RotateArrowPivot(Vector3 pos){
+    void RotateArrowPivot(Vector3 pos)
+    {
         Ray ray = Camera.main.ScreenPointToRay(pos);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100000f, shootMask))
@@ -102,9 +111,10 @@ public class ShootController : MonoBehaviour {
         return new Vector3(vector.x, 0, vector.z);
     }
 
-    public void ResetShoot(){
-        pullbackInterface.SetActive(true);
+    public void ResetShoot()
+    {
         canShoot = true;
+        pullbackInterface.SetActive(true);
         pullbackInterface.transform.position = ball.transform.position;
     }
 }
