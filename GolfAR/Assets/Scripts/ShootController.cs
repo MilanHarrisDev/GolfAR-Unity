@@ -14,6 +14,11 @@ public class ShootController : MonoBehaviour {
     [SerializeField]
     private Image arrow;
 
+    public bool canShoot = true;
+
+    [SerializeField]
+    private GameObject pullbackInterface;
+
     [SerializeField]
     private Transform imageTarget;
 
@@ -22,6 +27,11 @@ public class ShootController : MonoBehaviour {
     private Vector3 shootVector = Vector3.zero;
     private float shootSpeed = 0;
 
+    private Vector3 lastVelocity = Vector3.zero;
+
+    public bool Moving { get { return moving; }}
+    private bool moving = false;
+
     private void Start()
     {
         rb = ball.GetComponent<Rigidbody>();
@@ -29,22 +39,45 @@ public class ShootController : MonoBehaviour {
 
     private void Update()
     {
+        //Debug.Log("velocity: " + rb.velocity + ", magnitude: " + rb.velocity.magnitude);
+
         Physics.gravity = -imageTarget.up;
 
         if (Input.GetMouseButton(0))
             RotateArrowPivot(Input.mousePosition);
         else if (Input.touchCount > 0)
             RotateArrowPivot(Input.GetTouch(0).position);
+
+        if (rb.velocity != lastVelocity)//change in velocity
+        {
+            if (lastVelocity == Vector3.zero)
+            {
+                moving = true;
+                pullbackInterface.SetActive(false);
+                canShoot = false;
+                Debug.Log("Ball started moving");
+            }
+
+            if (rb.velocity == Vector3.zero)
+            {
+                moving = false;
+                GameManager.Instance.EndTurn();
+            }
+
+
+        }
+
+
+        lastVelocity = rb.velocity;
     }
 
     public void Shoot()
     {
-        rb.velocity = shootVector * shootSpeed;
+        if(canShoot)
+            rb.velocity = shootVector * shootSpeed;
     }
 
     void RotateArrowPivot(Vector3 pos){
-        Debug.Log("rotating");
-
         Ray ray = Camera.main.ScreenPointToRay(pos);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100000f, shootMask))
@@ -58,11 +91,7 @@ public class ShootController : MonoBehaviour {
                 arrow.fillAmount = fill;
 
                 shootVector = (GetXZVector(ball.position) - GetXZVector(hit.point)).normalized;
-<<<<<<< HEAD
                 shootSpeed = fill * 20f;
-=======
-                shootSpeed = fill * 40f;
->>>>>>> parent of 382b17d... Shooting and turn system work
             }
         }
 
@@ -71,5 +100,11 @@ public class ShootController : MonoBehaviour {
     Vector3 GetXZVector(Vector3 vector)
     {
         return new Vector3(vector.x, 0, vector.z);
+    }
+
+    public void ResetShoot(){
+        pullbackInterface.SetActive(true);
+        canShoot = true;
+        pullbackInterface.transform.position = ball.transform.position;
     }
 }
