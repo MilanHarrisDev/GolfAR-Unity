@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Quobject.SocketIoClientDotNet.Client;
 using Newtonsoft.Json;
+using UnityEngine.UI;
 
 public class Message
 {
@@ -15,12 +16,21 @@ public class ConnectionManager : MonoBehaviour {
     public string serverURL = "http://localhost:3000";
 
     protected Socket socket = null;
+
+    [SerializeField]
+    private InputField ip;
+    private InputField name;
 	
     private void Start()
     {
+    }
+
+    public void Connect()
+    {
+        serverURL = ip.text;
         DoOpen();
     }
-	
+
     private void OnDestroy()
     {
         DoClose();
